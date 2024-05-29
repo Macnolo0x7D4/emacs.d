@@ -37,26 +37,24 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
-;; Install a package via the elpaca macro
-;; See the "recipes" section of the manual for more details.
-
-;; (elpaca example-package)
-
-;; Install use-package support
 (elpaca elpaca-use-package
-  ;; Enable use-package :ensure support for Elpaca.
-  (elpaca-use-package-mode))
+  (elpaca-use-package-mode)
+  (setq elpaca-use-package-by-default t))
 
-;;When installing a package which modifies a form used at the top-level
-;;(e.g. a package which adds a use-package key word),
-;;use the :wait recipe keyword to block until that package has been installed/configured.
-;;For example:
-;;(use-package general :ensure (:wait t) :demand t)
+(elpaca-wait)
 
-;; Expands to: (elpaca evil (use-package evil :demand t))
-(use-package evil :ensure t :demand t)
+(use-package evil
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    (setq evil-vsplit-window-right t)
+    (setq evil-split-window-below t)
+    (evil-mode))
 
-;;Turns off elpaca-use-package-mode current declaration
-;;Note this will cause the declaration to be interpreted immediately (not deferred).
-;;Useful for configuring built-in emacs features.
+(use-package evil-collection
+    :after evil
+    :config
+    (setq evil-collection-mode-list '(dashboard dired ibuffer))
+    (evil-collection-init))
+
 (use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
