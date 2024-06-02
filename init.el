@@ -69,9 +69,29 @@
     :global-prefix "M-SPC")
   (macnolo/leader-keys
     "f ." '(find-file :wk "Find file")
+    "e" '(neotree-toggle :wk "Toggle Neotree")
     "c SPC" '(comment-line :wk "Comment lines"))
 
-   (macnolo/leader-keys
+  (macnolo/leader-keys
+    "b" '(:ignore t :wk "Bookmarks/Buffers")
+    "b b" '(switch-to-buffer :wk "Switch to buffer")
+    "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
+    "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
+    "b d" '(bookmark-delete :wk "Delete bookmark")
+    "b i" '(ibuffer :wk "Ibuffer")
+    "b k" '(kill-current-buffer :wk "Kill current buffer")
+    "b K" '(kill-some-buffers :wk "Kill multiple buffers")
+    "b l" '(list-bookmarks :wk "List bookmarks")
+    "b m" '(bookmark-set :wk "Set bookmark")
+    "b n" '(next-buffer :wk "Next buffer")
+    "b p" '(previous-buffer :wk "Previous buffer")
+    "b r" '(revert-buffer :wk "Reload buffer")
+    "b R" '(rename-buffer :wk "Rename buffer")
+    "b s" '(basic-save-buffer :wk "Save buffer")
+    "b S" '(save-some-buffers :wk "Save multiple buffers")
+    "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file"))
+
+  (macnolo/leader-keys
     "w" '(:ignore t :wk "Windows")
     "w w" '(evil-window-delete :wk "Close window")
     "w s" '(evil-window-split :wk "Horizontal split window")
@@ -86,10 +106,17 @@
     "w K" '(buf-move-up :wk "Buffer move up")
     "w L" '(buf-move-right :wk "Buffer move right"))
 
-   (macnolo/leader-keys
-     "t" '(:ignore t :wk "Terminal")
-     "t e" '(eshell :wk "Eshell")
-     "t SPC" '(eshell-command :wk "Eshell Command")))
+  (macnolo/leader-keys
+    "t" '(:ignore t :wk "Terminal")
+    "t e" '(eshell :wk "Eshell")
+    "t SPC" '(eshell-command :wk "Eshell Command"))
+
+  (macnolo/leader-keys
+    "g s" '(magit-status :wk "Git status"))
+
+  (macnolo/leader-keys
+    "p" '(projectile-command-map :wk "Projectile")))
+    ;; "g p" '(magit-)
 
 (set-face-attribute 'default nil
 		    :font "Codelia Nerd Font"
@@ -168,8 +195,8 @@
   :init (ivy-rich-mode 1)
   :custom
   (ivy-virtual-abbreviate 'full
-   ivy-rich-switch-buffer-align-virtual-buffer t
-   ivy-rich-path-style 'abbrev)
+			  ivy-rich-switch-buffer-align-virtual-buffer t
+			  ivy-rich-path-style 'abbrev)
   :config
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
@@ -181,8 +208,8 @@
   "Swap the current buffer and the buffer above the split.
 If there is no split, ie now window above the current one, an
 error is signaled."
-;;  "Switches between the current buffer, and the buffer above the
-;;  split, if possible."
+  ;;  "Switches between the current buffer, and the buffer above the
+  ;;  split, if possible."
   (interactive)
   (let* ((other-win (windmove-find-other-window 'up))
 	 (buf-this-buf (window-buffer (selected-window))))
@@ -196,7 +223,7 @@ error is signaled."
 
 ;;;###autoload
 (defun buf-move-down ()
-"Swap the current buffer and the buffer under the split.
+  "Swap the current buffer and the buffer under the split.
 If there is no split, ie now window under the current one, an
 error is signaled."
   (interactive)
@@ -213,7 +240,7 @@ error is signaled."
 
 ;;;###autoload
 (defun buf-move-left ()
-"Swap the current buffer and the buffer on the left of the split.
+  "Swap the current buffer and the buffer on the left of the split.
 If there is no split, ie now window on the left of the current
 one, an error is signaled."
   (interactive)
@@ -229,7 +256,7 @@ one, an error is signaled."
 
 ;;;###autoload
 (defun buf-move-right ()
-"Swap the current buffer and the buffer on the right of the split.
+  "Swap the current buffer and the buffer on the right of the split.
 If there is no split, ie now window on the right of the current
 one, an error is signaled."
   (interactive)
@@ -248,16 +275,115 @@ one, an error is signaled."
   :config
   (eshell-syntax-highlighting-global-mode +1))
 
+(use-package company
+  :defer 2
+  :diminish
+  :custom
+  (company-begin-commands '(self-insert-command))
+  (company-idle-delay .1)
+  (company-minimum-prefix-length 2)
+  (company-show-numbers t)
+  (company-tooltip-align-annotations 't)
+  (global-company-mode t))
+
+(use-package company-box
+  :after company
+  :diminish
+  :hook (company-mode . company-box-mode))
+
+(use-package elixir-mode :ensure t)
+
+(use-package go-mode :ensure t)
+
+(use-package clojure-mode :ensure t)
+
+(use-package magit)
+
+(use-package dashboard
+  :ensure t 
+  :init
+  (setq initial-buffer-choice 'dashboard-open)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  ;; (setq dashboard-startup-banner "/home/dt/.config/emacs/images/dtmacs-logo.png")  ;; use custom image as banner
+  (setq dashboard-center-content t) ;; set to 't' for centered content
+  (setq dashboard-items '((recents . 5)
+                          (agenda . 5 )
+                          (bookmarks . 3)
+                          (projects . 3)
+                          (registers . 3)))
+  :custom 
+  (dashboard-modify-heading-icons '((recents . "file-text")
+				    (bookmarks . "book")))
+  :config
+  (dashboard-setup-startup-hook))
+
 (use-package autothemer
   :ensure t)
 
-(elpaca (rose-pine-emacs
-	 :after autothemer
-	 :host github
-	 :repo "thongpv87/rose-pine-emacs"
-	 :branch "master"
-	 :main nil))
+(use-package neotree
+  :config
+  (setq neo-smart-open t
+	neo-show-hidden-files t
+	neo-window-width 35
+	neo-window-fixed-size nil
+	inhibit-compacting-font-caches t
+	projectile-switch-project-action 'neotree-projectile-action) 
+  (add-hook 'neo-after-create-hook
+	    #'(lambda (_)
+		(with-current-buffer (get-buffer neo-buffer-name)
+		  (setq truncate-lines t)
+		  (setq word-wrap nil)
+		  (make-local-variable 'auto-hscroll-mode)
+		  (setq auto-hscroll-mode nil)))))
 
-(elpaca-wait)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
-(load-theme 'rose-pine-moon t)
+(use-package flycheck
+  :ensure t
+  :defer t
+  :diminish
+  :init (global-flycheck-mode))
+
+(use-package projectile
+  :config
+  (projectile-mode 1))
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 30
+        doom-modeline-bar-width 5
+        doom-modeline-persp-name t
+        doom-modeline-persp-icon t))
+
+;; (elpaca (rose-pine-emacs
+;; 	 :after autothemer
+;; 	 :host github
+;; 	 :repo "thongpv87/rose-pine-emacs"
+;; 	 :branch "master"
+;; 	 :main nil)
+;;   (load-theme 'rose-pine-color t))
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
+
+(add-to-list 'default-frame-alist '(alpha-background . 90))
