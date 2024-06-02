@@ -54,7 +54,7 @@
 (use-package evil-collection
   :after evil
   :config
-  (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
+  (setq evil-collection-mode-list '(dashboard dired ibuffer magit neotree))
   (evil-collection-init))
 
 (use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
@@ -281,6 +281,15 @@ one, an error is signaled."
   :config
   (eshell-syntax-highlighting-global-mode +1))
 
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook
+  (elixir-mode . lsp)
+  :config
+  (lsp-enable-which-key-integration t))
+
 (use-package company
   :defer 2
   :diminish
@@ -304,27 +313,6 @@ one, an error is signaled."
 (use-package clojure-mode :ensure t)
 
 (use-package magit)
-
-(use-package dashboard
-  :ensure t 
-  :init
-  (setq initial-buffer-choice 'dashboard-open)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
-  (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
-  ;; (setq dashboard-startup-banner "/home/dt/.config/emacs/images/dtmacs-logo.png")  ;; use custom image as banner
-  (setq dashboard-center-content t) ;; set to 't' for centered content
-  (setq dashboard-items '((recents . 5)
-                          (agenda . 5 )
-                          (bookmarks . 3)
-                          (projects . 3)
-                          (registers . 3)))
-  :custom 
-  (dashboard-modify-heading-icons '((recents . "file-text")
-				    (bookmarks . "book")))
-  :config
-  (dashboard-setup-startup-hook))
 
 (use-package autothemer
   :ensure t)
@@ -373,6 +361,40 @@ one, an error is signaled."
 ;; 	 :branch "master"
 ;; 	 :main nil)
 ;;   (load-theme 'rose-pine-color t))
+
+;; (use-package dashboard
+;;   :ensure t 
+;;   :init
+;;   (setq initial-buffer-choice 'dashboard-open)
+;;   (setq dashboard-set-heading-icons t)
+;;   (setq dashboard-set-file-icons t)
+;;   (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+;;   (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+;;   ;; (setq dashboard-startup-banner "/home/dt/.config/emacs/images/dtmacs-logo.png")  ;; use custom image as banner
+;;   (setq dashboard-center-content t) ;; set to 't' for centered content
+;;   (setq dashboard-items '((recents . 5)
+;;                           (agenda . 5 )
+;;                           (bookmarks . 3)
+;;                           (projects . 3)
+;;                           (registers . 3)))
+
+(use-package dashboard
+  :config
+  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
+  (setq dashboard-startup-banner 'logo)
+  (setq dashboard-center-content t)
+  (setq dashboard-projects-backend 'projectile)
+  (setq dashboard-items '((recents   . 5)
+			  (bookmarks . 5)
+			  (projects  . 5)))
+  (dashboard-setup-startup-hook))
+
+;;   :custom 
+  ;; (dashboard-modify-heading-icons '((recents . "file-text")
+  ;; 				    (bookmarks . "book")))
+  ;; :config
+  ;; (dashboard-setup-startup-hook))
 
 (use-package doom-themes
   :ensure t
