@@ -54,7 +54,7 @@
 (use-package evil-collection
   :after evil
   :config
-  (setq evil-collection-mode-list '(dashboard dired ibuffer))
+  (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
   (evil-collection-init))
 
 (use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
@@ -112,7 +112,13 @@
     "t SPC" '(eshell-command :wk "Eshell Command"))
 
   (macnolo/leader-keys
-    "g s" '(magit-status :wk "Git status"))
+    "g s" '(magit-status :wk "Git status")
+    "g p" '(magit-push :wk "Git push")
+    "g P" '(magit-pull :wk "Git pull")
+    "g b" '(magit-branch-checkout :wk "Switch branch")
+    "g c" '(:ignore t :wk "Create")
+    "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
+    "g c c" '(magit-commit-create :wk "Create commit"))
 
   (macnolo/leader-keys
     "p" '(projectile-command-map :wk "Projectile")))
