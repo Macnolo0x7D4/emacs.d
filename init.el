@@ -43,6 +43,9 @@
 
 (elpaca-wait)
 
+(use-package load-env-vars)
+  ;; (load-env-vars "~/.config/emacs/.env"))
+
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -68,9 +71,12 @@
     :prefix "SPC"
     :global-prefix "M-SPC")
   (macnolo/leader-keys
+    "s" '(save-buffer :wk "Save buffer")
     "f ." '(find-file :wk "Find file")
     "e" '(neotree-toggle :wk "Toggle Neotree")
-    "c SPC" '(comment-line :wk "Comment lines"))
+    "c SPC" '(comment-line :wk "Comment lines")
+    "f f" '(projectile-find-file :wk "Find file inside project")
+    "f p" '(projectile-switch-project :w "Switch Project"))
 
   (macnolo/leader-keys
     "b" '(:ignore t :wk "Bookmarks/Buffers")
@@ -108,6 +114,7 @@
 
   (macnolo/leader-keys
     "t" '(:ignore t :wk "Terminal")
+    "t" '(:ignore t :wk "Terminal")
     "t e" '(eshell :wk "Eshell")
     "t SPC" '(eshell-command :wk "Eshell Command"))
 
@@ -121,27 +128,26 @@
     "g c c" '(magit-commit-create :wk "Create commit"))
 
   (macnolo/leader-keys
-    "p" '(projectile-command-map :wk "Projectile")))
-    ;; "g p" '(magit-)
+    "p" '(:ignore t :wk "Projects")
+    "p a" '(projectile-add-known-project :wk "Add Project")
+    "p d" '(projectile-remove-known-project :wk "Delete Project")))
 
 (set-face-attribute 'default nil
-		    :font "Codelia Nerd Font"
-		    :height 130
+		    :font "JetbrainsMono Nerd Font"
+		    :height 120
 		    :weight 'medium)
 
 (set-face-attribute 'variable-pitch nil
 		    :font "Ubuntu"
-		    :height 130
+		    :height 120
 		    :weight 'medium)
 
 (set-face-attribute 'fixed-pitch nil
 		    :font "Codelia Nerd Font"
-		    :height 130
+		    :height 120
 		    :weight 'medium)
 
-(add-to-list 'default-frame-alist '(font . "Codelia Nerd Font-12:antialias=true:hinting=false"))
-
-(setq-default line-spacing 0.12)
+(setq-default line-spacing 0.15)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -281,14 +287,26 @@ one, an error is signaled."
   :config
   (eshell-syntax-highlighting-global-mode +1))
 
+(use-package elixir-mode :ensure t)
+
+(use-package go-mode :ensure t)
+
+(use-package clojure-mode :ensure t)
+
+(use-package typescript-mode :ensure t)
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook
   (elixir-mode . lsp)
+  (clojure-mode . lsp)
+  (go-mode . lsp)
+  (typescript-mode . lsp)
   :config
-  (lsp-enable-which-key-integration t))
+  (lsp-enable-which-key-integration t)
+  (setq lsp-headerline-breadcrumb-enable nil))
 
 (use-package company
   :defer 2
@@ -305,12 +323,6 @@ one, an error is signaled."
   :after company
   :diminish
   :hook (company-mode . company-box-mode))
-
-(use-package elixir-mode :ensure t)
-
-(use-package go-mode :ensure t)
-
-(use-package clojure-mode :ensure t)
 
 (use-package magit)
 
@@ -354,15 +366,15 @@ one, an error is signaled."
         doom-modeline-persp-name t
         doom-modeline-persp-icon t))
 
-;; (elpaca (rose-pine-emacs
-;; 	 :after autothemer
-;; 	 :host github
-;; 	 :repo "thongpv87/rose-pine-emacs"
-;; 	 :branch "master"
-;; 	 :main nil)
-;;   (load-theme 'rose-pine-color t))
+(elpaca (konrad1977-rose-pine-emacs
+	 :after autothemer
+	 :host github
+	 :repo "konrad1977/pinerose-emacs"
+	 :branch "main"
+	 :main nil)
+  (load-theme 'rose-pine t))
 
-;; (use-package dashboard
+;; ;; (use-package dashboard
 ;;   :ensure t 
 ;;   :init
 ;;   (setq initial-buffer-choice 'dashboard-open)
@@ -396,22 +408,13 @@ one, an error is signaled."
   ;; :config
   ;; (dashboard-setup-startup-hook))
 
-(use-package doom-themes
-  :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   ;; Global settings (defaults)
+;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;   (load-theme 'doom-one t)
+;;   (doom-themes-org-config))
 
-  ;; Enable flashing mode-line on errors
-  (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))
-
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
