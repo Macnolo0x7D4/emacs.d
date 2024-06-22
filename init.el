@@ -1,5 +1,7 @@
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
+(setq-default indent-tabs-mode nil)
+(setq tab-always-indent nil)
 
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
