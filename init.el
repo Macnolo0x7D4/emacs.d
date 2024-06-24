@@ -292,13 +292,18 @@ one, an error is signaled."
   :config
   (eshell-syntax-highlighting-global-mode +1))
 
+(setq js-indent-level 2)
+
 (use-package elixir-mode :ensure t)
 
 (use-package go-mode :ensure t)
 
 (use-package clojure-mode :ensure t)
 
-(use-package typescript-mode :ensure t)
+(use-package typescript-mode
+  :ensure t
+  :config
+  (setq typescript-indent-level 2))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
