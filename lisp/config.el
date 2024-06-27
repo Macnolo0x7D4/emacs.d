@@ -48,6 +48,8 @@
      (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
      (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
+  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+
   (major-mode-remap-alist
    '((yaml-mode . yaml-ts-mode)
      (bash-mode . bash-ts-mode)
@@ -79,7 +81,7 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
 
-  ;; (setq display-line-numbers-type 'relative)
+  (setq display-line-numbers-type 'relative)
 
   (global-display-line-numbers-mode 1)
   (global-visual-line-mode t)
