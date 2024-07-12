@@ -59,3 +59,5 @@
   "p" '(:ignore t :wk "Projects")
   "p a" '(projectile-add-known-project :wk "Add Project")
   "p d" '(projectile-remove-known-project :wk "Delete Project"))
+
+(provide 'm-keybindings)

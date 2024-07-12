@@ -40,3 +40,5 @@
       (set-window-buffer (selected-window) (window-buffer other-win))
       (set-window-buffer other-win buf-this-buf)
       (select-window other-win))))
+
+(provide 'm-windows)

@@ -1,6 +1,9 @@
-(load-file (expand-file-name "lisp/config.el" user-emacs-directory))
-(load-file (expand-file-name "lisp/packages.el" user-emacs-directory))
-(load-file (expand-file-name "lisp/windows.el" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+(require 'm-config)
+(require 'm-packages)
+(require 'm-windows)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

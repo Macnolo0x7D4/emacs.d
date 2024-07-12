@@ -90,3 +90,5 @@
   (size-indication-mode t)
   (delete-selection-mode 1)
   (fset 'display-startup-echo-area-message #'ignore))
+
+(provide 'm-config)
