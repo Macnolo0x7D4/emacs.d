@@ -1,9 +1,24 @@
-(use-package
- eglot
- :ensure nil
- :config
- (add-to-list
-  'eglot-server-programs `((elixir-mode) . ("language_server.sh"))))
+;; (use-package
+;;  eglot
+;;  :ensure nil
+;;  :config
+;;  (add-to-list
+;;   'eglot-server-programs `((elixir-mode) . ("language_server.sh"))))
+
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+         (elixir-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :custom
+  (lsp-headerline-breadcrumb-enable nil)
+  :commands lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
+(use-package dap-mode)
 
 (use-package company
   :defer 2
@@ -67,6 +82,7 @@
   :config
   (add-hook 'prog-mode-hook 'copilot-mode)
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+  (add-to-list 'warning-suppress-types '(copilot copilot-no-mode-indent)))
 
 (provide 'm-lsp)

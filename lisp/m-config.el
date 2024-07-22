@@ -82,6 +82,7 @@
   (scroll-bar-mode -1)
 
   (setq display-line-numbers-type 'relative)
+  (setq-default tab-width 2)
 
   (global-display-line-numbers-mode 1)
   (global-visual-line-mode t)
