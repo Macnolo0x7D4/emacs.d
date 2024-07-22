@@ -132,9 +132,9 @@
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
 
-(unless (package-installed-p 'pinerose-emacs)
-  (package-vc-install "https://github.com/konrad1977/pinerose-emacs"))
-
-(load-theme 'rose-pine t)
+(use-package autothemer
+  :config
+  (add-to-list 'custom-theme-load-path (concat user-emacs-directory "lips/themes/"))
+  (load-theme 'rose-pine t))
 
 (provide 'm-packages)
