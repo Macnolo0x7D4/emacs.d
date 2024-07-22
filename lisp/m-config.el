@@ -50,18 +50,18 @@
 
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
-  (major-mode-remap-alist
-   '((yaml-mode . yaml-ts-mode)
-     (bash-mode . bash-ts-mode)
-     (js2-mode . js-ts-mode)
-     (typescript-mode . typescript-ts-mode)
-     (java-mode . java-ts-mode)
-     (json-mode . json-ts-mode)
-     (kotlin-mode . kotlin-ts-mode)
-     (css-mode . css-ts-mode)
-     (python-mode . python-ts-mode)
-     (rust-mode . rust-ts-mode)
-     (elixir-mode . elixir-ts-mode)))
+  ;; (major-mode-remap-alist
+  ;;  '((yaml-mode . yaml-ts-mode)
+  ;;    (bash-mode . bash-ts-mode)
+  ;;    (js2-mode . js-ts-mode)
+  ;;    (typescript-mode . typescript-ts-mode)
+  ;;    (java-mode . java-ts-mode)
+  ;;    (json-mode . json-ts-mode)
+  ;;    (kotlin-mode . kotlin-ts-mode)
+  ;;    (css-mode . css-ts-mode)
+  ;;    (python-mode . python-ts-mode)
+  ;;    (rust-mode . rust-ts-mode)
+  ;;    (elixir-mode . elixir-ts-mode)))
 
   :init
   ;; (load custom-file 'noerror)
@@ -72,9 +72,9 @@
   (set-keyboard-coding-system 'utf-8)
   (global-hl-line-mode +1)
 
-  (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 120 :weight 'medium)
-  (set-face-attribute 'variable-pitch nil :font "Ubuntu" :height 120 :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil :font "Codelia Nerd Font" :height 120 :weight 'medium)
+  (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 110 :weight 'medium)
+  (set-face-attribute 'variable-pitch nil :font "Ubuntu" :height 110 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil :font "Codelia Nerd Font" :height 110 :weight 'medium)
 
   :config
   (menu-bar-mode -1)
