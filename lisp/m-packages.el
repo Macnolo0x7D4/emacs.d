@@ -26,9 +26,8 @@
   (require 'm-keybindings))
 
 (use-package which-key
-  :init
-  (which-key-mode 1)
   :config
+  (which-key-mode 1)
   (setq which-key-side-window-location 'bottom
 	which-key-sort-order #'which-key-key-order-alpha
 	which-key-sort-uppercase-first nil
@@ -118,13 +117,13 @@
 
 (use-package all-the-icons-ivy-rich
   :ensure t
-  :init (all-the-icons-ivy-rich-mode 1))
+  :custom (all-the-icons-ivy-rich-mode 1))
 
 (use-package ivy-rich
   :after ivy
   :ensure t
-  :init (ivy-rich-mode 1)
   :custom
+  (ivy-rich-mode 1)
   (ivy-virtual-abbreviate 'full
 			  ivy-rich-switch-buffer-align-virtual-buffer t
 			  ivy-rich-path-style 'abbrev)
@@ -134,7 +133,6 @@
 
 (use-package autothemer
   :config
-  (add-to-list 'custom-theme-load-path (concat user-emacs-directory "lips/themes/"))
   (load-theme 'rose-pine t))
 
 (provide 'm-packages)

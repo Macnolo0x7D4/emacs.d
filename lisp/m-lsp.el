@@ -42,9 +42,7 @@
 
 (use-package alchemist)
 
-(use-package
- elixir-mode
- :hook (elixir-mode . eglot-ensure))
+(use-package elixir-mode)
 
 (use-package
  exunit
