@@ -74,7 +74,7 @@
 
   (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 110 :weight 'medium)
   (set-face-attribute 'variable-pitch nil :font "Ubuntu" :height 110 :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil :font "Codelia Nerd Font" :height 110 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil :font "JetbrainsMono Nerd Font" :height 110 :weight 'medium)
 
   :config
   (menu-bar-mode -1)
