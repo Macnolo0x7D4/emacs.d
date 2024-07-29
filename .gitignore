@@ -47,3 +47,8 @@ flycheck_*.el
 
 
 # End of https://www.toptal.com/developers/gitignore/api/emacs
+/.cache/
+/.lsp-session-v1
+/projectile-bookmarks.eld
+/recentf
+/transient/
