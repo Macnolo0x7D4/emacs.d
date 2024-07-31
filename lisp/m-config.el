@@ -87,6 +87,9 @@
   (global-display-line-numbers-mode 1)
   (global-visual-line-mode t)
 
+  (setq scroll-margin 8)
+  (setq scroll-conservatively 101)
+
   (column-number-mode t)
   (size-indication-mode t)
   (delete-selection-mode 1)
