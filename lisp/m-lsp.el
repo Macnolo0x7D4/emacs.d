@@ -1,24 +1,10 @@
-;; (use-package
-;;  eglot
-;;  :ensure nil
-;;  :config
-;;  (add-to-list
-;;   'eglot-server-programs `((elixir-mode) . ("language_server.sh"))))
-
-(use-package lsp-mode
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (
-         (elixir-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :custom
-  (lsp-headerline-breadcrumb-enable nil)
-  :commands lsp)
-
-(use-package lsp-ui :commands lsp-ui-mode)
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-
-(use-package dap-mode)
+(use-package
+  eglot
+  :config
+  (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-at-point-mode t)
+  (add-to-list
+    'eglot-server-programs
+    `((elixir-mode) . (,(expand-file-name "lsp/elixir/language_server.sh" user-emacs-directory)))))
 
 (use-package company
   :defer 2
@@ -36,21 +22,33 @@
   :diminish
   :hook (company-mode . company-box-mode))
 
+(use-package eldoc-box)
+
 (use-package yasnippet
   :config
   (yas-global-mode 1))
 
-(use-package elixir-mode)
+(use-package elixir-mode
+  :config
+  (add-hook 'elixir-format-hook
+    (lambda () (if (projectile-project-p)
+                 (setq elixir-format-arguments
+                   (list "--dot-formatter"
+                     (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
+                 (setq elixir-format-arguments nil))))
+  (add-hook 'elixir-mode-hook
+    (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+  (add-hook 'elixir-mode-hook 'eglot-ensure))
 
 (use-package
- exunit
- :diminish t
- :bind
- ("C-c e ." . exunit-verify-single)
- ("C-c e b" . exunit-verify)
- ("C-c e u a" . exunit-verify-all-in-umbrella)
- ("C-c e a" . exunit-verify-all)
- ("C-c e l" . exunit-rerun))
+  exunit
+  :diminish t
+  :bind
+  ("C-c e ." . exunit-verify-single)
+  ("C-c e b" . exunit-verify)
+  ("C-c e u a" . exunit-verify-all-in-umbrella)
+  ("C-c e a" . exunit-verify-all)
+  ("C-c e l" . exunit-rerun))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
