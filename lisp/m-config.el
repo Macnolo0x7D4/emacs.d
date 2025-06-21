@@ -26,18 +26,18 @@
   (lisp-indent-offset 2)
   (use-short-answers t)
 
-  ;; (major-mode-remap-alist
-  ;;  '((yaml-mode . yaml-ts-mode)
-  ;;    (bash-mode . bash-ts-mode)
-  ;;    (js2-mode . js-ts-mode)
-  ;;    (typescript-mode . typescript-ts-mode)
-  ;;    (java-mode . java-ts-mode)
-  ;;    (json-mode . json-ts-mode)
-  ;;    (kotlin-mode . kotlin-ts-mode)
-  ;;    (css-mode . css-ts-mode)
-  ;;    (python-mode . python-ts-mode)
-  ;;    (rust-mode . rust-ts-mode)
-  ;;    (elixir-mode . elixir-ts-mode)))
+  (major-mode-remap-alist
+   '((yaml-mode . yaml-ts-mode)
+     (bash-mode . bash-ts-mode)
+     (js2-mode . js-ts-mode)
+     (typescript-mode . typescript-ts-mode)
+     (java-mode . java-ts-mode)
+     (json-mode . json-ts-mode)
+     (kotlin-mode . kotlin-ts-mode)
+     (css-mode . css-ts-mode)
+     (python-mode . python-ts-mode)
+     (rust-mode . rust-ts-mode)
+     (elixir-mode . elixir-ts-mode)))
 
   :init
   ;; (load custom-file 'noerror)
