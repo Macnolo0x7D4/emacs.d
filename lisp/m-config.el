@@ -72,9 +72,9 @@
   (set-keyboard-coding-system 'utf-8)
   (global-hl-line-mode +1)
 
-  (set-face-attribute 'default nil :font "JetbrainsMono Nerd Font" :height 110 :weight 'medium)
-  (set-face-attribute 'variable-pitch nil :font "Ubuntu" :height 110 :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil :font "JetbrainsMono Nerd Font" :height 110 :weight 'medium)
+  (set-face-attribute 'default nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
+  (set-face-attribute 'variable-pitch nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
 
   :config
   (menu-bar-mode -1)
