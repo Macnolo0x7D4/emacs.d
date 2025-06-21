@@ -1,11 +1,11 @@
-(use-package
-  eglot
+(use-package eglot
+  :ensure nil
   :config
   (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-at-point-mode t)
-  (add-to-list
-    'eglot-server-programs
-    `((elixir-ts-mode) . (,(executable-find "elixir-ls")))
-    `((clojure-mode) . (,(executable-find "clojure-lsp")))))
+  (add-to-list 'eglot-server-programs
+    `((elixir-ts-mode elixir-mode) . (,(executable-find "elixir-ls"))))
+  (add-to-list 'eglot-server-programs
+               `((clojure-ts-mode) . (,(executable-find "clojure-lsp")))))
 
 (use-package company
   :defer 2
