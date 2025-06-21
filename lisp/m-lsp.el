@@ -69,14 +69,4 @@
   (setq-default web-mode-markup-indent-offset 2)
   (setq-default web-mode-attribute-indent-offset 2))
 
-(unless (package-installed-p 'copilot)
-  (package-vc-install "https://github.com/copilot-emacs/copilot.el"))
-
-(use-package copilot
-  :config
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-  (add-to-list 'warning-suppress-types '(copilot copilot-no-mode-indent)))
-
 (provide 'm-lsp)
