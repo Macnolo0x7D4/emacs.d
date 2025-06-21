@@ -4,7 +4,8 @@
   (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-at-point-mode t)
   (add-to-list
     'eglot-server-programs
-    `((elixir-mode) . (,(expand-file-name "lsp/elixir/language_server.sh" user-emacs-directory)))))
+    `((elixir-ts-mode) . (,(executable-find "elixir-ls")))
+    `((clojure-mode) . (,(executable-find "clojure-lsp")))))
 
 (use-package company
   :defer 2
@@ -28,17 +29,17 @@
   :config
   (yas-global-mode 1))
 
-(use-package elixir-mode
-  :config
-  (add-hook 'elixir-format-hook
-    (lambda () (if (projectile-project-p)
-                 (setq elixir-format-arguments
-                   (list "--dot-formatter"
-                     (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
-                 (setq elixir-format-arguments nil))))
-  (add-hook 'elixir-mode-hook
-    (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
-  (add-hook 'elixir-mode-hook 'eglot-ensure))
+;; (use-package elixir-ts-mode
+;;   :config
+;;   (add-hook 'elixir-format-hook
+;;     (lambda () (if (projectile-project-p)
+;;                  (setq elixir-format-arguments
+;;                    (list "--dot-formatter"
+;;                      (concat (locate-dominating-file buffer-file-name ".formatter.exs") ".formatter.exs")))
+;;                  (setq elixir-format-arguments nil))))
+;;   (add-hook 'elixir-mode-hook
+;;     (lambda () (add-hook 'before-save-hook 'elixir-format nil t)))
+;;   (add-hook 'elixir-mode-hook 'eglot-ensure))
 
 (use-package
   exunit
@@ -68,5 +69,7 @@
   (setq-default web-mode-code-indent-offset 2)
   (setq-default web-mode-markup-indent-offset 2)
   (setq-default web-mode-attribute-indent-offset 2))
+
+(use-package clojure-ts-mode)
 
 (provide 'm-lsp)

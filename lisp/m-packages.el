@@ -131,8 +131,13 @@
   (ivy-set-display-transformer 'ivy-switch-buffer
                                'ivy-rich-switch-buffer-transformer))
 
-(use-package autothemer
+(use-package catppuccin-theme
   :config
-  (load-theme 'rose-pine t))
+  (setq catppuccin-flavor 'mocha) 
+  (load-theme 'catppuccin :no-confirm))
+
+;; (use-package autothemer
+;;   :config
+;;   (load-theme 'rose-pine t))
 
 (provide 'm-packages)
