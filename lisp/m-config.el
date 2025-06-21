@@ -26,12 +26,14 @@
   (lisp-indent-offset 2)
   (use-short-answers t)
 
-  (treesit-language-source-alist
+  (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
      (cmake "https://github.com/uyha/tree-sitter-cmake")
      (css "https://github.com/tree-sitter/tree-sitter-css")
+     (clojure "https://github.com/sogaiu/tree-sitter-clojure")
      (elisp "https://github.com/Wilfred/tree-sitter-elisp")
      (heex "https://github.com/phoenixframework/tree-sitter-heex")
+     (eex "https://github.com/connorlay/tree-sitter-eex")
      (elixir "https://github.com/elixir-lang/tree-sitter-elixir")
      (go "https://github.com/tree-sitter/tree-sitter-go")
      (html "https://github.com/tree-sitter/tree-sitter-html")
@@ -50,18 +52,18 @@
 
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
-  ;; (major-mode-remap-alist
-  ;;  '((yaml-mode . yaml-ts-mode)
-  ;;    (bash-mode . bash-ts-mode)
-  ;;    (js2-mode . js-ts-mode)
-  ;;    (typescript-mode . typescript-ts-mode)
-  ;;    (java-mode . java-ts-mode)
-  ;;    (json-mode . json-ts-mode)
-  ;;    (kotlin-mode . kotlin-ts-mode)
-  ;;    (css-mode . css-ts-mode)
-  ;;    (python-mode . python-ts-mode)
-  ;;    (rust-mode . rust-ts-mode)
-  ;;    (elixir-mode . elixir-ts-mode)))
+  (setq major-mode-remap-alist
+   '((yaml-mode . yaml-ts-mode)
+     (bash-mode . bash-ts-mode)
+     (js2-mode . js-ts-mode)
+     (typescript-mode . typescript-ts-mode)
+     (java-mode . java-ts-mode)
+     (json-mode . json-ts-mode)
+     (kotlin-mode . kotlin-ts-mode)
+     (css-mode . css-ts-mode)
+     (python-mode . python-ts-mode)
+     (rust-mode . rust-ts-mode)
+     (elixir-mode . elixir-ts-mode)))
 
   :init
   ;; (load custom-file 'noerror)
@@ -72,9 +74,9 @@
   (set-keyboard-coding-system 'utf-8)
   (global-hl-line-mode +1)
 
-  (set-face-attribute 'default nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
-  (set-face-attribute 'variable-pitch nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
+  (set-face-attribute 'default nil :font "BerkeleyMono Nerd Font" :height 130 :weight 'medium)
+  (set-face-attribute 'variable-pitch nil :font "BerkeleyMono Nerd Font" :height 130 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil :font "BerkeleyMono Nerd Font" :height 130 :weight 'medium)
 
   :config
   (menu-bar-mode -1)
