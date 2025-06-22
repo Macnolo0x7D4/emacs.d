@@ -1,8 +1,13 @@
+;; core-keybindings.el --- Global keybindings -*- lexical-binding: t -*-
+
 (macnolo/leader-keys
   "s" '(save-buffer :wk "Save buffer")
-  "f ." '(find-file :wk "Find file")
-  "e" '(neotree-toggle :wk "Toggle Neotree")
-  "c SPC" '(comment-line :wk "Comment lines")
+  "f ." '(find-file :wk "Find file"))
+
+(macnolo/leader-keys
+  "p" '(:ignore t :wk "Projects")
+  "p a" '(projectile-add-known-project :wk "Add Project")
+  "p d" '(projectile-remove-known-project :wk "Delete Project")
   "f f" '(projectile-find-file :wk "Find file inside project")
   "f p" '(projectile-switch-project :w "Switch Project"))
 
@@ -42,7 +47,6 @@
 
 (macnolo/leader-keys
   "t" '(:ignore t :wk "Terminal")
-  "t" '(:ignore t :wk "Terminal")
   "t e" '(eshell :wk "Eshell")
   "t SPC" '(eshell-command :wk "Eshell Command"))
 
@@ -56,8 +60,7 @@
   "g c c" '(magit-commit-create :wk "Create commit"))
 
 (macnolo/leader-keys
-  "p" '(:ignore t :wk "Projects")
-  "p a" '(projectile-add-known-project :wk "Add Project")
-  "p d" '(projectile-remove-known-project :wk "Delete Project"))
+  "e" '(neotree-toggle :wk "Toggle Neotree")
+  "c SPC" '(comment-line :wk "Comment lines"))
 
-(provide 'm-keybindings)
+(provide 'core-keybindings)

@@ -1,3 +1,5 @@
+;; elixir.el --- Elixir configuration -*- lexical-binding: t -*-
+
 (use-package elixir-ts-mode
   :config
   (with-eval-after-load 'elixir-ts-mode
@@ -16,4 +18,4 @@
               (lambda ()
                 (add-hook 'before-save-hook #'eglot-format nil t)))))
 
-(provide 'm-langs-elixir)
+(provide 'elixir)

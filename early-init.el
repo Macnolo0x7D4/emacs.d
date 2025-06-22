@@ -1,14 +1,13 @@
-;(setq gc-cons-threshold (* 50 1000 1000))
+;; early-init.el --- Early initialization -*- lexical-binding: t -*-
 
-(require 'package)
+(setq gc-cons-threshold most-positive-fixnum)
 
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(setq package-enable-at-startup nil)
 
-(package-initialize)
-
-;(unless package-archive-contents
-  ;(package-refresh-contents))
-
-(setq use-package-always-ensure t)
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(setq load-prefer-newer t)

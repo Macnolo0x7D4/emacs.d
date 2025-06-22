@@ -1,9 +1,6 @@
 ;;; package --- A beutiful theme
-;;; Commentary:
 ;;; rose-pine based theme
 
-
-;;; Code:
 (eval-when-compile
   (require 'cl-lib))
 
@@ -16,10 +13,9 @@
 (autothemer-deftheme
 	rose-pine "A theme based on rose-pine's amazing color scheme"
 
- ((((class color) (min-colors #xFFFFFF))        ; col 1 GUI/24bit
-   ((class color) (min-colors #xFF)))           ; col 2 Xterm/256
+ ((((class color) (min-colors #xFFFFFF))
+   ((class color) (min-colors #xFF)))
 
-  ;; Define our color palette
   (highlight-high   "#524f67" "#d7d7ff")
   (highlight-med    "#403d52" "#d7d7ff")
   (highlight-low    "#21202E" "#d7d7ff")
@@ -350,9 +346,7 @@
   (treemacs-git-renamed-face		   			(:foreground text))
   (treemacs-git-modified-face		   			(:foreground rose))
 
-  ;; lets support solaire mode
   (solaire-default-face (:background base))
-  ;; lsp
   (lsp-headerline-breadcrumb-path-error-face (:underline (:color rose :style 'wave)
                                                          :foreground muted :background base))
 
@@ -371,19 +365,16 @@
   (lsp-ui-sideline-current-symbol					(:foreground foam))
   (lsp-ui-sideline-symbol							(:foreground muted))
 
-  ;; dashboard
   (dashboard-items-face								(:weight 'light :height 150))
   (dashboard-banner-logo-title						(:weight 'thin :height 320))
   (dashboard-heading								(:foreground subtle :weight 'thin :height 170))
   (dashboard-no-items-face							(:foreground muted))
 
-  ;; all-the-icons
   (all-the-icons-dgreen							(:foreground pine))
   (all-the-icons-green							(:foreground pine))
   (all-the-icons-dpurple						(:foreground iris))
   (all-the-icons-purple							(:foreground iris))
 
-  ;; evil
   (evil-ex-lazy-highlight           (:foreground base :background gold :bold t))
   (evil-ex-substitute-matches       (:foreground love :strike-through t))
   (evil-ex-substitute-replacement   (:foreground foam :bold t))
@@ -450,7 +441,6 @@
   (hydra-face-red			(:foreground love))
   (hydra-face-teal			(:foreground foam))
 
-  ;; Bookmarks
   (bm-fringe-face                           (:background love :foreground base))
   (bm-fringe-persistent-face                (:background love :foreground base))
 
@@ -477,7 +467,6 @@
   (goggles-changed (:background foam))
   (goggles-removed (:background love))
   
-  ;; Tree sitter highlightning
   (tree-sitter-hl-face:function                  (:inherit 'font-lock-function-name-face))
   (tree-sitter-hl-face:function.call             (:inherit 'tree-sitter-hl-face:function))
   (tree-sitter-hl-face:function.builtin          (:foreground love))
@@ -525,7 +514,6 @@
   (tree-sitter-hl-face:case-pattern              (:foreground gold))
   (tree-sitter-hl-face:keyword.compiler          (:foreground muted :bold t :italic t))
 
-  ;; ;; Custom for pinkus tree-sitter-swift
   (tree-sitter-hl-face:include                   (:foreground muted :italic t :bold t))
   (tree-sitter-hl-face:parameter                 (:foreground iris :italic t))
   (tree-sitter-hl-face:repeat                    (:foreground foam))
@@ -541,12 +529,6 @@
   (swift-mode:builtin-enum-case-face (:foreground foam))
   (swift-mode:builtin-method-trailing-closure-face (:foreground foam))
   (swift-mode:builtin-function-trailing-closure-face (:foreground foam))
-  (swift-mode:function-call-face (:foreground love))
-  
-  ;; (localizeable-variable-face (:inherit font-lock-string-face))
-  ;; (localizeable-value-face (:inherit font-lock-keyword-face))
-
- ))
+  (swift-mode:function-call-face (:foreground love))))
 
 (provide-theme 'rose-pine)
-;;; rose-pine-theme.el ends here
