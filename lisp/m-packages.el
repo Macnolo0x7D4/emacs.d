@@ -137,4 +137,8 @@
 ;;   :config
 ;;   (load-theme 'rose-pine t))
 
+(use-package smartparens)
+
+(use-package rainbow-delimiters)
+
 (provide 'm-packages)
