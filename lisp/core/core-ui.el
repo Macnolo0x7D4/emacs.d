@@ -50,9 +50,9 @@
   (load-theme 'catppuccin :no-confirm))
 
 (defun setup-fonts ()
-  (set-face-attribute 'default nil :font "BerkeleyMono Nerd Font" :height 130 :weight 'medium)
-  (set-face-attribute 'variable-pitch nil :font "BerkeleyMono Nerd Font" :height 130 :weight 'medium)
-  (set-face-attribute 'fixed-pitch nil :font "BerkeleyMono Nerd Font" :height 130 :weight 'medium))
+  (set-face-attribute 'default nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
+  (set-face-attribute 'variable-pitch nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil :font "BerkeleyMono Nerd Font" :height 120 :weight 'medium))
 
 (if (daemonp)
     (add-hook 'server-after-make-frame-hook #'setup-fonts)
