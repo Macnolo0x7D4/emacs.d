@@ -7,7 +7,9 @@
   (add-to-list 'eglot-server-programs
     `((elixir-ts-mode elixir-mode) . (,(executable-find "elixir-ls"))))
   (add-to-list 'eglot-server-programs
-               `((clojure-ts-mode) . (,(executable-find "clojure-lsp")))))
+    `((clojure-ts-mode) . (,(executable-find "clojure-lsp"))))
+  (add-to-list 'eglot-server-programs
+               `((java-ts-mode) . (,(executable-find "jdtls")))))
 
 (use-package company
   :defer 2
